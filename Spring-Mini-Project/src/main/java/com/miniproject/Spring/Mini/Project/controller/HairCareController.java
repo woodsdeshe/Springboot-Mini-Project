@@ -3,6 +3,7 @@ package com.miniproject.Spring.Mini.Project.controller;
 import com.miniproject.Spring.Mini.Project.model.HairCareCategory;
 import com.miniproject.Spring.Mini.Project.service.HairCareService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,10 @@ public class HairCareController {
     @GetMapping(path = "/categories/")
     public List<HairCareCategory> getCategories() {
         return hairCareService.getHairCategories();
+    }
+
+    @PostMapping(path = "/categories/")
+    public HairCareCategory createHairCategory(HairCareCategory hairCareObject) {
+        return hairCareService.createHairCategory(hairCareObject);
     }
 }
