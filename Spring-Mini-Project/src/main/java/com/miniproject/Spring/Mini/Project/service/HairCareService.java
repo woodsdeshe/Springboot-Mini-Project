@@ -66,7 +66,7 @@ public class HairCareService {
         if (hairCategoryId == null) {
             throw new InformationNotFoundException("Category not found for " + hairCategoryId);
         } else {
-            return hairCareRepository.deleteHairCareCategoriesById(hairCategoryId)
+            return hairCareRepository.deleteHairCareCategoriesById(hairCategoryId);
         }
     }
 
