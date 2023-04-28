@@ -33,7 +33,7 @@ public class HairCareController {
 
     // http://localhost:9093/api/categories/{categoryId}/
     @GetMapping(path = "/categories/{hairCategoryId}")
-    public Optional<HairCareCategory> getHairCategory(@PathVariable  Long hairCategoryId) {
+    public HairCareCategory getHairCategory(@PathVariable  Long hairCategoryId) {
         return hairCareService.getHairCategory(hairCategoryId);
     }
 
