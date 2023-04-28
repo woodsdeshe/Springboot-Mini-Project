@@ -71,6 +71,7 @@ public class HairCareService {
 
 
     public HairCareCategory deleteHairCategory(Long categoryId) {
+        System.out.println("service calling deleteHairCategory ==>");
         Optional<HairCareCategory> category = hairCareRepository.findById(categoryId);
         if (category.isPresent()) {
             hairCareRepository.delete(category.get());
@@ -81,11 +82,15 @@ public class HairCareService {
     }
 
     public List<Accessories> getAccessories(Long hairCategoryId) {
-        System.out.println("service calling getAccessories");
+        System.out.println("service calling getAccessories ==>");
         HairCareCategory category = getHairCategory(hairCategoryId);
         if (category.getAccessoriesList().isEmpty()) {
             throw new InformationNotFoundException("Accessories not found in category " + hairCategoryId);
         }
         return category.getAccessoriesList();
+    }
+
+    public Accessories createAccessories(Accessories accessoryObject) {
+
     }
 }
