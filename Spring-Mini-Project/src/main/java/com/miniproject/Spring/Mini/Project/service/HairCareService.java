@@ -14,5 +14,5 @@ public class HairCareService {
         this.hairCareRepository = hairCareRepository;
     }
 
-    public
+
 }
