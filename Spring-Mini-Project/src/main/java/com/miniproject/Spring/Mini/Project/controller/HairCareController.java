@@ -42,4 +42,9 @@ public class HairCareController {
     public HairCareCategory updateHairCategory(@PathVariable Long hairCategoryId, @RequestBody HairCareCategory hairCareObject) {
         return hairCareService.updateHairCategory(hairCategoryId, hairCareObject);
     }
+
+    @DeleteMapping(path = "/categories/{hairCategoryId}")
+    public HairCareCategory deleteHairCategory(@PathVariable Long hairCategoryId) {
+        return hairCareService.deleteHairCategory(hairCategoryId);
+    }
 }
