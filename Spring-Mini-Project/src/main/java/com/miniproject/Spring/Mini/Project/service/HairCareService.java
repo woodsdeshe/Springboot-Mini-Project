@@ -83,6 +83,9 @@ public class HairCareService {
     public List<Accessories> getAccessories(Long hairCategoryId) {
         System.out.println("service calling getAccessories");
         HairCareCategory category = getHairCategory(hairCategoryId);
+        if (category.getAccessoriesList().isEmpty()) {
+            throw new InformationNotFoundException("Accessories not found in category " + hairCategoryId);
+        }
         return category.getAccessoriesList();
     }
 }

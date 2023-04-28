@@ -52,7 +52,9 @@ public class HairCareController {
     }
 
     @GetMapping(path = "/categories/{hairCategoryId/accessories/")
-    public List<Accessories> getAccessories(Long hairCategoryId) {
-        return getAccessories(hairCategoryId);
+    public List<Accessories> getHairAccessories(Long hairCategoryId) {
+        return hairCareService.getAccessories(hairCategoryId);
     }
+
+
 }
