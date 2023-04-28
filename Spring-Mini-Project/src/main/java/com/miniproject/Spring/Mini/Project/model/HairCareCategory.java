@@ -1,8 +1,11 @@
 package com.miniproject.Spring.Mini.Project.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -49,6 +52,18 @@ public class HairCareCategory {
         this.id = id;
         this.name = name;
         this.description = description;
+    }
+
+    @OneToMany(mappedBy = "category", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Accessories> accessoriesList;
+
+    public List<Accessories> getAccessoriesList() {
+        return accessoriesList;
+    }
+
+    public void setAccessoriesList(List<Accessories> accessoriesList) {
+        this.accessoriesList = accessoriesList;
     }
 
     @Override

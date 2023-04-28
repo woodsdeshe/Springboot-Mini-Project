@@ -80,8 +80,9 @@ public class HairCareService {
         }
     }
 
-    public List<Accessories> getAccessories() {
+    public List<Accessories> getAccessories(Long hairCategoryId) {
         System.out.println("service calling getAccessories");
-        return accessoriesRepository.findAll();
+        HairCareCategory category = getHairCategory(hairCategoryId);
+        return category.getAccessoriesList();
     }
 }
