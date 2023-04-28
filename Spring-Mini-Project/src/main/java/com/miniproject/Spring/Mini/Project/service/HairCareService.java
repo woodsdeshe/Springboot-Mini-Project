@@ -23,12 +23,15 @@ public class HairCareService {
         return hairCareRepository.findAll();
     }
 
-    public HairCareCategory createHairCategory(HairCareCategory hairCareObject) {
-        HairCareCategory hairCategory = hairCareRepository.findByName(hairCareObject.getName());
-        if (hairCareObject != null) {
-            throw new InformationExistException("Category with the name " + hairCategory.getName() + " already exists");
+    public HairCareCategory createCategory(HairCareCategory hairCareObject) {
+        System.out.println("service calling createCategory ==>");
+
+        HairCareCategory category = hairCareRepository.findByName(hairCareObject.getName());
+        if (category != null) {
+            throw new InformationExistException("category with name " + category.getName() + " already exists");
         } else {
             return hairCareRepository.save(hairCareObject);
         }
     }
+
 }

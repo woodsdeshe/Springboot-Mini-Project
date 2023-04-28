@@ -27,6 +27,6 @@ public class HairCareController {
 
     @PostMapping(path = "/categories/")
     public HairCareCategory createHairCategory(HairCareCategory hairCareObject) {
-        return hairCareService.createHairCategory(hairCareObject);
+        return hairCareService.createCategory(hairCareObject);
     }
 }
