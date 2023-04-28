@@ -37,6 +37,7 @@ public class HairCareController {
         return hairCareService.getHairCategory(hairCategoryId);
     }
 
+    // http://localhost:9093/api/categories/{categoryId}/
     @PutMapping(path = "/categories/{hairCategoryId}")
     public HairCareCategory updateHairCategory(@PathVariable Long hairCategoryId, @RequestBody HairCareCategory hairCareObject) {
         return hairCareService.updateHairCategory(hairCategoryId, hairCareObject);
