@@ -21,6 +21,6 @@ public class HairCareController {
     // http://localhost:9093/api/categories/
     @GetMapping(path = "/categories/")
     public List<HairCareCategory> getCategories() {
-
+        return hairCareService.getHairCategories();
     }
 }
