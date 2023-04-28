@@ -47,4 +47,20 @@ public class HairCareService {
         }
     }
 
+    public HairCareCategory updateHairCategory(Long hairCategoryId, HairCareCategory hairCareObject) {
+        Optional<HairCareCategory> category = getHairCategory(hairCategoryId);
+        if (category.isPresent()) {
+            if (hairCareObject.equals(hairCareRepository.findByName(hairCareObject.getName()))){
+                throw new InformationExistException("Category " + category.get().getName() + " already exists");
+            } else {
+                HairCareCategory updateHairCategory = hairCareRepository.findById(hairCategoryId).get();
+                updateHairCategory.setName(hairCareObject.getName());
+                updateHairCategory.setDescription(hairCareObject.getDescription());
+                return hairCareRepository.save(updateHairCategory);
+            }
+        } else {
+            throw new InformationNotFoundException("Category with id " + hairCategoryId + " not found");
+        }
+    }
+
 }
