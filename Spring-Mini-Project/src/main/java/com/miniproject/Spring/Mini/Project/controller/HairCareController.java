@@ -36,4 +36,9 @@ public class HairCareController {
     public Optional<HairCareCategory> getHairCategory(@PathVariable  Long hairCategoryId) {
         return hairCareService.getHairCategory(hairCategoryId);
     }
+
+    @PutMapping(path = "/categories/{hairCategoryId}")
+    public HairCareCategory updateHairCategory(@PathVariable Long hairCategoryId, @RequestBody HairCareCategory hairCareObject) {
+        return hairCareService.updateHairCategory(hairCategoryId, hairCareObject);
+    }
 }
