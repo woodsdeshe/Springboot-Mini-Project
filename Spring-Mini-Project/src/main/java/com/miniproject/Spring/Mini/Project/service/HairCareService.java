@@ -60,4 +60,14 @@ public class HairCareService {
         }
     }
 
+    public HairCareCategory deleteHairCategory(Long hairCategoryId) {
+        System.out.println("service calling deleteHairCategory");
+        HairCareCategory category = getHairCategory(hairCategoryId);
+        if (hairCategoryId == null) {
+            throw new InformationNotFoundException("Category not found for " + hairCategoryId);
+        } else {
+            return hairCareRepository.deleteHairCareCategoriesById(hairCategoryId)
+        }
+    }
+
 }
