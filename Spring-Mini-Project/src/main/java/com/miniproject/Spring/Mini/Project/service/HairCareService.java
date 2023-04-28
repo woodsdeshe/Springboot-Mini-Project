@@ -1,8 +1,11 @@
 package com.miniproject.Spring.Mini.Project.service;
 
+import com.miniproject.Spring.Mini.Project.model.HairCareCategory;
 import com.miniproject.Spring.Mini.Project.repository.HairCareRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class HairCareService {
@@ -14,5 +17,8 @@ public class HairCareService {
         this.hairCareRepository = hairCareRepository;
     }
 
-
+    public List<HairCareCategory> getHairCategories() {
+        System.out.println("service calling getHairCategories");
+        return hairCareRepository.findAll();
+    }
 }
