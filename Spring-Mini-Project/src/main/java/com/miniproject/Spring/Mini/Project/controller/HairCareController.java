@@ -2,6 +2,7 @@ package com.miniproject.Spring.Mini.Project.controller;
 
 import com.miniproject.Spring.Mini.Project.model.HairCareCategory;
 import com.miniproject.Spring.Mini.Project.service.HairCareService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class HairCareController {
 
     private HairCareService hairCareService;
 
+    @Autowired
     public void setHairCareService(HairCareService hairCareService) {
         this.hairCareService = hairCareService;
     }
