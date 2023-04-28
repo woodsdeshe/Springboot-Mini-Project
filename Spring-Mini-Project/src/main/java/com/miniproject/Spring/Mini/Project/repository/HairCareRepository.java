@@ -9,7 +9,5 @@ public interface HairCareRepository extends JpaRepository<HairCareCategory, Long
     HairCareCategory findByName(String name);
 
     HairCareCategory findHairCareCategoryById(Long hairCategoryId);
-
-    HairCareCategory deleteHairCareCategoriesById(Long hairCategoryId);
 }
 
