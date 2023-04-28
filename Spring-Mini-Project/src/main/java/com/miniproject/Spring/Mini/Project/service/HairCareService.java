@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class HairCareService {
@@ -63,7 +63,7 @@ public class HairCareService {
     public HairCareCategory deleteHairCategory(Long hairCategoryId) {
         System.out.println("service calling deleteHairCategory");
         HairCareCategory category = getHairCategory(hairCategoryId);
-        if (hairCategoryId == null) {
+        if (category == null) {
             throw new InformationNotFoundException("Category not found for " + hairCategoryId);
         } else {
             return hairCareRepository.deleteHairCareCategoriesById(hairCategoryId);
