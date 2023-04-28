@@ -23,7 +23,7 @@ public class HairCareService {
         return hairCareRepository.findAll();
     }
 
-    public HairCareCategory createCategory(HairCareCategory hairCareObject) {
+    public HairCareCategory createHairCategory(HairCareCategory hairCareObject) {
         System.out.println("service calling createCategory ==>");
 
         HairCareCategory category = hairCareRepository.findByName(hairCareObject.getName());
@@ -32,6 +32,10 @@ public class HairCareService {
         } else {
             return hairCareRepository.save(hairCareObject);
         }
+    }
+
+    public HairCareCategory getHairCategory(Long hairCategoryId) {
+        System.out.println("service calling getHairCategory");
     }
 
 }
