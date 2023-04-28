@@ -2,7 +2,9 @@ package com.miniproject.Spring.Mini.Project.service;
 
 import com.miniproject.Spring.Mini.Project.exception.InformationExistException;
 import com.miniproject.Spring.Mini.Project.exception.InformationNotFoundException;
+import com.miniproject.Spring.Mini.Project.model.Accessories;
 import com.miniproject.Spring.Mini.Project.model.HairCareCategory;
+import com.miniproject.Spring.Mini.Project.repository.AccessoriesRepository;
 import com.miniproject.Spring.Mini.Project.repository.HairCareRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,13 @@ import java.util.Optional;
 
 @Service
 public class HairCareService {
+
+    private AccessoriesRepository accessoriesRepository;
+
+    @Autowired
+    public void setAccessoriesRepository(AccessoriesRepository accessoriesRepository) {
+        this.accessoriesRepository = accessoriesRepository;
+    }
 
     private HairCareRepository hairCareRepository;
 
@@ -69,5 +78,10 @@ public class HairCareService {
         } else {
             throw new InformationNotFoundException("Category with id " + categoryId + " not found ");
         }
+    }
+
+    public List<Accessories> getAccessories() {
+        System.out.println("service calling getAccessories");
+        return accessoriesRepository.findAll();
     }
 }
