@@ -19,5 +19,6 @@ public class AccessoryService {
 
     public List<Accessories> getAccessories() {
         System.out.println("service calling getAccessories");
+        return accessoriesRepository.findAll();
     }
 }
