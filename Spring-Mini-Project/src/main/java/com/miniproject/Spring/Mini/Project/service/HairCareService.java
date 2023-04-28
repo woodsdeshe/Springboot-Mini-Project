@@ -6,6 +6,7 @@ import com.miniproject.Spring.Mini.Project.model.HairCareCategory;
 import com.miniproject.Spring.Mini.Project.repository.HairCareRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -60,14 +61,15 @@ public class HairCareService {
         }
     }
 
-    public HairCareCategory deleteHairCategory(Long hairCategoryId) {
+
+    @Transactional
+    public void deleteHairCategory(Long hairCategoryId) {
         System.out.println("service calling deleteHairCategory");
         HairCareCategory category = getHairCategory(hairCategoryId);
         if (category == null) {
             throw new InformationNotFoundException("Category not found for " + hairCategoryId);
         } else {
-            return hairCareRepository.deleteHairCareCategoriesById(hairCategoryId);
+            hairCareRepository.deleteHairCareCategoriesById(hairCategoryId);
         }
     }
-
 }

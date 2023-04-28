@@ -3,6 +3,7 @@ package com.miniproject.Spring.Mini.Project.controller;
 import com.miniproject.Spring.Mini.Project.model.HairCareCategory;
 import com.miniproject.Spring.Mini.Project.service.HairCareService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,7 +45,8 @@ public class HairCareController {
     }
 
     @DeleteMapping(path = "/categories/{hairCategoryId}")
-    public HairCareCategory deleteHairCategory(@PathVariable Long hairCategoryId) {
-        return hairCareService.deleteHairCategory(hairCategoryId);
+    public ResponseEntity<Void> deleteHairCategory(@PathVariable(value = "hairCategoryId") Long hairCategoryId) {
+        hairCareService.deleteHairCategory(hairCategoryId);
+        return ResponseEntity.noContent().build();
     }
 }
