@@ -45,12 +45,14 @@ public class HairCareController {
         return hairCareService.updateHairCategory(hairCategoryId, hairCareObject);
     }
 
+    // http://localhost:9093/api/categories/{categoryId}/
     @DeleteMapping(path = "/categories/{hairCategoryId}")
     public ResponseEntity<Void> deleteHairCategory(@PathVariable(value = "hairCategoryId") Long hairCategoryId) {
         hairCareService.deleteHairCategory(hairCategoryId);
         return ResponseEntity.noContent().build();
     }
 
+    // http://localhost:9093/api/categories/{categoryId}/accessories/
     @GetMapping(path = "/categories/{hairCategoryId/accessories/")
     public List<Accessories> getHairAccessories(Long hairCategoryId) {
         return hairCareService.getAccessories(hairCategoryId);
