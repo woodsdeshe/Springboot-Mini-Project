@@ -17,12 +17,12 @@ public class Accessories {
     private String description;
 
     @Column
-    private Integer rating;
+    private String rating;
 
     public Accessories() {
     }
 
-    public Accessories(Long id, String name, String description, Integer rating) {
+    public Accessories(Long id, String name, String description, String rating) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -53,11 +53,11 @@ public class Accessories {
         this.description = description;
     }
 
-    public Integer getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
