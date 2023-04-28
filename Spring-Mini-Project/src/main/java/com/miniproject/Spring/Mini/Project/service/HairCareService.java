@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -62,14 +63,13 @@ public class HairCareService {
     }
 
 
-    @Transactional
-    public void deleteHairCategory(Long hairCategoryId) {
-        System.out.println("service calling deleteHairCategory");
-        HairCareCategory category = getHairCategory(hairCategoryId);
-        if (category == null) {
-            throw new InformationNotFoundException("Category not found for " + hairCategoryId);
+    public HairCareCategory deleteHairCategory(Long categoryId) {
+        Optional<HairCareCategory> category = hairCareRepository.findById(categoryId);
+        if (category.isPresent()) {
+            hairCareRepository.delete(category.get());
+            return category.get();
         } else {
-            hairCareRepository.deleteHairCareCategoriesById(hairCategoryId);
+            throw new InformationNotFoundException("Category with id " + categoryId + " not found ");
         }
     }
 }
