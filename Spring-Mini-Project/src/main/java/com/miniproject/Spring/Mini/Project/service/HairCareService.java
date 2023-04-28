@@ -48,8 +48,8 @@ public class HairCareService {
     }
 
     public HairCareCategory updateHairCategory(Long hairCategoryId, HairCareCategory hairCareObject) {
+        System.out.println("service calling getHairCategory");
         Optional<HairCareCategory> category = getHairCategory(hairCategoryId);
-        if (category.isPresent()) {
             if (hairCareObject.equals(hairCareRepository.findByName(hairCareObject.getName()))){
                 throw new InformationExistException("Category " + category.get().getName() + " already exists");
             } else {
@@ -57,9 +57,6 @@ public class HairCareService {
                 updateHairCategory.setName(hairCareObject.getName());
                 updateHairCategory.setDescription(hairCareObject.getDescription());
                 return hairCareRepository.save(updateHairCategory);
-            }
-        } else {
-            throw new InformationNotFoundException("Category with id " + hairCategoryId + " not found");
         }
     }
 
