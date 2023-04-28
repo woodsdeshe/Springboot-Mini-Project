@@ -1,5 +1,6 @@
 package com.miniproject.Spring.Mini.Project.controller;
 
+import com.miniproject.Spring.Mini.Project.model.Accessories;
 import com.miniproject.Spring.Mini.Project.model.HairCareCategory;
 import com.miniproject.Spring.Mini.Project.service.HairCareService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,10 @@ public class HairCareController {
     public ResponseEntity<Void> deleteHairCategory(@PathVariable(value = "hairCategoryId") Long hairCategoryId) {
         hairCareService.deleteHairCategory(hairCategoryId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(path = "/categories/{hairCategoryId/accessories/")
+    public List<Accessories> getAccessories(Long hairCategoryId) {
+        return getAccessories(hairCategoryId);
     }
 }
