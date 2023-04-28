@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface HairCareRepository extends JpaRepository<HairCareCategory, Long> {
     HairCareCategory findByName(String name);
 
-    Optional<HairCareCategory> findById(Long hairCareId);
+    HairCareCategory findHairCareCategoryById(Long hairCategoryId);
 }
 
