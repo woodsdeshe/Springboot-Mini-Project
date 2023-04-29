@@ -1,5 +1,7 @@
 package com.miniproject.Spring.Mini.Project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -60,6 +62,19 @@ public class Accessories {
     public void setRating(String rating) {
         this.rating = rating;
     }
+
+
+    public HairCareCategory getHairCareCategory() {
+        return hairCareCategory;
+    }
+
+    public void setHairCareCategory(HairCareCategory hairCareCategory) {
+        this.hairCareCategory = hairCareCategory;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "hair_care_category_id")
+    private HairCareCategory hairCareCategory;
 
     @Override
     public String toString() {

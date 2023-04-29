@@ -5,6 +5,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -54,9 +55,9 @@ public class HairCareCategory {
         this.description = description;
     }
 
-    @OneToMany(mappedBy = "category", orphanRemoval = true)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Accessories> accessoriesList;
+
+    @OneToMany(mappedBy = "hairCareCategory", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Accessories> accessoriesList = new ArrayList<>();
 
     public List<Accessories> getAccessoriesList() {
         return accessoriesList;
