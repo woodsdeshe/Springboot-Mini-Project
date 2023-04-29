@@ -90,7 +90,16 @@ public class HairCareService {
         return category.getAccessoriesList();
     }
 
-    public Accessories createAccessories(Accessories accessoryObject) {
+    public Accessories createAccessories(Long hairCategoryId, Accessories accessoryObject) {
+        System.out.println("service calling createAccessories ==>");
+        HairCareCategory category = getHairCategory(hairCategoryId);
+        Accessories accessory = accessoriesRepository.findByName(accessoryObject.getName());
 
+        if (accessory != null) {
+            throw new InformationExistException("Accessory with name " + accessory.getName() + " already exists");
+        } else {
+            category.getAccessoriesList().add(accessoryObject);
+            return accessoriesRepository.save(accessoryObject);
+        }
     }
 }
