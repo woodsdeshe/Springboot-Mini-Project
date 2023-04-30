@@ -58,8 +58,13 @@ public class HairCareController {
         return hairCareService.getAccessories(hairCategoryId);
     }
 
+    // http://localhost:9093/api/categories/{categoryId}/accessories/{accessoryId}
+    @GetMapping(path = "categories/{hairCategoryId}/accessories/{accessoryId}")
+    public Accessories getAccessory(@PathVariable(value = "hairCategoryId") Long hairCategoryId, @PathVariable(value = "accessoryId") Long accessoryId) {
+        return hairCareService.getAccessory(hairCategoryId, accessoryId);
+    }
 
-
+    // http://localhost:9093/api/categories/{categoryId}/accessories/
     @PostMapping(path = "/categories/{hairCategoryId}/accessories/")
     public Accessories createAccessories(@PathVariable(value = "hairCategoryId") Long hairCategoryId, @RequestBody Accessories accessoryObject) {
         return hairCareService.createAccessories(hairCategoryId, accessoryObject);
