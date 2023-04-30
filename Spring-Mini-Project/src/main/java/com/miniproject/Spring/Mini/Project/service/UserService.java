@@ -1,5 +1,6 @@
 package com.miniproject.Spring.Mini.Project.service;
 
+import com.miniproject.Spring.Mini.Project.exception.InformationExistException;
 import com.miniproject.Spring.Mini.Project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -25,7 +26,7 @@ public class UserService {
             userObject.setPassword(passwordEncoder.encode(userObject.getPassword()));
             return userRepository.save(userObject);
         } else {
-            throw
+            throw new InformationExistException("user with email address" + userObject.getEmailAddress() + " already exists");
 
         }
     }
