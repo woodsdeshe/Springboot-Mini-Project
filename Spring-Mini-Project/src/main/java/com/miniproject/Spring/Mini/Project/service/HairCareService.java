@@ -126,6 +126,7 @@ public class HairCareService {
     }
 
     public void deleteAccessory(Long categoryId, Long accessoryId) {
+        System.out.println("calling deleteAccessory ==>");
         try {
             Optional<Accessories> accessory = accessoriesRepository.findById(accessoryId);
             if (accessory.isPresent() && accessory.get().getCategory().getId().equals(categoryId)) {

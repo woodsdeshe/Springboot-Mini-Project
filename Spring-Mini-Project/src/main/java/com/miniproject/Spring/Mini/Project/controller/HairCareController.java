@@ -4,9 +4,11 @@ import com.miniproject.Spring.Mini.Project.model.Accessories;
 import com.miniproject.Spring.Mini.Project.model.Category;
 import com.miniproject.Spring.Mini.Project.service.HairCareService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -78,9 +80,13 @@ public class HairCareController {
     }
 
     // http://localhost:9093/api/categories/{categoryId}/accessories/{accessoryId}
-    @DeleteMapping(path = "/categories/{hairCategoryId}/accessories/{accessoryId}/")
-    public ResponseEntity<Void> deleteAccessory(@PathVariable(value = "hairCategoryId") Long hairCategoryId, @PathVariable(value = "accessoryId") Long accessoryId) {
-        hairCareService.deleteAccessory(hairCategoryId,accessoryId);
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/categories/{hairCategoryId}/accessories/{accessoryId}")
+    public ResponseEntity<HashMap<String, String>> deleteAccessory(
+            @PathVariable(value = "hairCategoryId") Long hairCategoryId, @PathVariable(value = "accessoryId") Long accessoryId) {
+
+        hairCareService.deleteAccessory(hairCategoryId, accessoryId);
+        HashMap<String, String> responseMessage = new HashMap<>();
+        responseMessage.put("status", "accessory with id: " + accessoryId + " was successfully deleted.");
+        return new ResponseEntity<>(responseMessage, HttpStatus.OK);
     }
 }
