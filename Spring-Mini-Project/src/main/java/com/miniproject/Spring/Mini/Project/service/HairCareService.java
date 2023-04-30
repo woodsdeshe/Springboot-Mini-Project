@@ -7,6 +7,7 @@ import com.miniproject.Spring.Mini.Project.model.Category;
 import com.miniproject.Spring.Mini.Project.repository.AccessoriesRepository;
 import com.miniproject.Spring.Mini.Project.repository.HairCareRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -124,19 +125,16 @@ public class HairCareService {
         }
     }
 
-    public Accessories deleteAccessory(Long hairCategoryId, Long accessoryId) {
-        Optional<Category> categoryOptional = hairCareRepository.findById(hairCategoryId);
-        if (categoryOptional.isPresent()) {
-            Optional<Accessories> accessoryOptional = accessoriesRepository.findById(accessoryId);
-            if (accessoryOptional.isPresent()) {
-                Accessories accessory = accessoryOptional.get();
-                accessoriesRepository.delete(accessory);
-                return accessory;
+    public void deleteAccessory(Long categoryId, Long accessoryId) {
+        try {
+            Optional<Accessories> accessory = accessoriesRepository.findById(accessoryId);
+            if (accessory.isPresent() && accessory.get().getCategory().getId().equals(categoryId)) {
+                accessoriesRepository.delete(accessory.get());
             } else {
-                throw new InformationNotFoundException("Accessory with id " + accessoryId + " not found in category " + hairCategoryId);
+                throw new InformationNotFoundException("accessory with id " + accessoryId + " not found in category " + categoryId);
             }
-        } else {
-            throw new InformationNotFoundException("Category with id " + hairCategoryId + " not found");
+        } catch (EmptyResultDataAccessException e) {
+            throw new InformationNotFoundException("accessory with id " + accessoryId + " not found in category " + categoryId);
         }
     }
 }
