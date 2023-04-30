@@ -113,18 +113,14 @@ public class HairCareService {
     }
 
     public Accessories updateAccessory(Long hairCategoryId, Long accessoryId, Accessories accessoryObject) {
-        try {
-            System.out.println("service calling updateAccessory ==>");
-            Accessories accessory = getAccessory(hairCategoryId, accessoryId);
+        Accessories accessory = getAccessory(hairCategoryId, accessoryId);
+        if (accessoryObject.equals(accessoriesRepository.findByName(accessoryObject.getName()))){
+            throw new InformationExistException("Accessory " + accessory.getName() + " already exists");
+        } else {
             accessory.setName(accessoryObject.getName());
             accessory.setDescription(accessoryObject.getDescription());
             accessory.setRating(accessoryObject.getRating());
             return accessoriesRepository.save(accessory);
-        } catch (NoSuchElementException e) {
-            throw new InformationNotFoundException("Accessory or Category not found");
         }
-
-
-
     }
 }
