@@ -124,19 +124,19 @@ public class HairCareService {
         }
     }
 
-    public Accessories deleteCategoryRecipe(Long hairCategoryId, Long accessoryId) {
-        // lunch
-        Optional<Category> category = hairCareRepository.findById(hairCategoryId);
-        if (category.isPresent()) {
-            Optional<Accessories> accessory = accessoriesRepository.findAccessoriesById(hairCategoryId).stream().filter(r -> r.getId().equals(recipeId)).findFirst();
-            if (recipe.isPresent()) {
-                recipeRepository.delete(recipe.get());
-                return recipe.get();
+    public Accessories deleteAccessory(Long hairCategoryId, Long accessoryId) {
+        Optional<Category> categoryOptional = hairCareRepository.findById(hairCategoryId);
+        if (categoryOptional.isPresent()) {
+            Optional<Accessories> accessoryOptional = accessoriesRepository.findById(accessoryId);
+            if (accessoryOptional.isPresent()) {
+                Accessories accessory = accessoryOptional.get();
+                accessoriesRepository.delete(accessory);
+                return accessory;
             } else {
-                throw new InformationNotFoundException("recipe with id  " + recipeId + " not found");
+                throw new InformationNotFoundException("Accessory with id " + accessoryId + " not found in category " + hairCategoryId);
             }
         } else {
-            throw new InformationNotFoundException("category with id " + categoryId + " not found");
+            throw new InformationNotFoundException("Category with id " + hairCategoryId + " not found");
         }
     }
 }
