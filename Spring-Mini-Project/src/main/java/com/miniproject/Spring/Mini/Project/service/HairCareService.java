@@ -123,4 +123,13 @@ public class HairCareService {
             return accessoriesRepository.save(accessory);
         }
     }
+
+    public void deleteAccessory(Long hairCategoryId, Long accessoryId) {
+        Accessories accessory = getAccessory(hairCategoryId, accessoryId);
+        if (accessory != null) {
+            accessoriesRepository.delete(accessory);
+        } else {
+            throw new InformationNotFoundException("Accessory with id " + accessoryId + " not found in category " + hairCategoryId);
+        }
+    }
 }

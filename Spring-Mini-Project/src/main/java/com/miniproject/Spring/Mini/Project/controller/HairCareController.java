@@ -34,19 +34,19 @@ public class HairCareController {
     }
 
     // http://localhost:9093/api/categories/{categoryId}/
-    @GetMapping(path = "/categories/{hairCategoryId}")
+    @GetMapping(path = "/categories/{hairCategoryId}/")
     public Category getHairCategory(@PathVariable  Long hairCategoryId) {
         return hairCareService.getHairCategory(hairCategoryId);
     }
 
     // http://localhost:9093/api/categories/{categoryId}/
-    @PutMapping(path = "/categories/{hairCategoryId}")
+    @PutMapping(path = "/categories/{hairCategoryId}/")
     public Category updateHairCategory(@PathVariable Long hairCategoryId, @RequestBody Category hairCareObject) {
         return hairCareService.updateHairCategory(hairCategoryId, hairCareObject);
     }
 
     // http://localhost:9093/api/categories/{categoryId}/
-    @DeleteMapping(path = "/categories/{hairCategoryId}")
+    @DeleteMapping(path = "/categories/{hairCategoryId}/")
     public ResponseEntity<Void> deleteHairCategory(@PathVariable(value = "hairCategoryId") Long hairCategoryId) {
         hairCareService.deleteHairCategory(hairCategoryId);
         return ResponseEntity.noContent().build();
@@ -59,7 +59,7 @@ public class HairCareController {
     }
 
     // http://localhost:9093/api/categories/{categoryId}/accessories/{accessoryId}
-    @GetMapping(path = "/categories/{hairCategoryId}/accessories/{accessoryId}")
+    @GetMapping(path = "/categories/{hairCategoryId}/accessories/{accessoryId}/")
     public Accessories getAccessory(@PathVariable(value = "hairCategoryId") Long hairCategoryId, @PathVariable(value = "accessoryId") Long accessoryId) {
         return hairCareService.getAccessory(hairCategoryId, accessoryId);
     }
@@ -72,8 +72,14 @@ public class HairCareController {
 
     // http://localhost:9093/api/categories/{categoryId}/accessories/{accessoryId}
     @PutMapping(path = "/categories/{hairCategoryId}/accessories/{accessoryId}/")
-    public Accessories updateAccessory(@PathVariable(value = "hairCategoryId") Long hairCategoryId, @PathVariable(value = "accessoryId") Long accessoryId, @RequestBody Accessories accessoryObject) {
+    public Accessories updateAccessory(@PathVariable(value = "hairCategoryId") Long hairCategoryId,                                        @PathVariable(value = "accessoryId") Long accessoryId,
+                                       @RequestBody Accessories accessoryObject) {
         return hairCareService.updateAccessory(hairCategoryId,accessoryId,accessoryObject);
     }
 
+    // http://localhost:9093/api/categories/{categoryId}/accessories/{accessoryId}
+    @DeleteMapping(path = "/categories/{hairCategoryId}/accessories/{accessoryId}/")
+    public void deleteAccessory(@PathVariable(value = "hairCategoryId") Long hairCategoryId, @PathVariable(value = "accessoryId") Long accessoryId) {
+        hairCareService.deleteAccessory(hairCategoryId,accessoryId);
+    }
 }
