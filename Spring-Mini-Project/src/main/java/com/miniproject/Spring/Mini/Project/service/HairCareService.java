@@ -113,6 +113,18 @@ public class HairCareService {
     }
 
     public Accessories updateAccessory(Long hairCategoryId, Long accessoryId, Accessories accessoryObject) {
-        sou
+        try {
+            System.out.println("service calling updateAccessory ==>");
+            Accessories accessory = getAccessory(hairCategoryId, accessoryId);
+            accessory.setName(accessoryObject.getName());
+            accessory.setDescription(accessoryObject.getDescription());
+            accessory.setRating(accessoryObject.getRating());
+            return accessoriesRepository.save(accessory);
+        } catch (NoSuchElementException e) {
+            throw new InformationNotFoundException("Accessory or Category not found");
+        }
+
+
+
     }
 }
