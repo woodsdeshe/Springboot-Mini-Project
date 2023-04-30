@@ -70,12 +70,11 @@ public class HairCareService {
     }
 
 
-    public HairCareCategory deleteHairCategory(Long categoryId) {
+    public void deleteHairCategory(Long categoryId) {
         System.out.println("service calling deleteHairCategory ==>");
         Optional<HairCareCategory> category = hairCareRepository.findById(categoryId);
         if (category.isPresent()) {
             hairCareRepository.delete(category.get());
-            return category.get();
         } else {
             throw new InformationNotFoundException("Category with id " + categoryId + " not found ");
         }
