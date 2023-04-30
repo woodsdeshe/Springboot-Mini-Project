@@ -10,4 +10,7 @@ public interface AccessoriesRepository extends JpaRepository<Accessories, Long> 
 
     // find accessories by id
     Accessories findAccessoriesById(Long accessoryId);
+
+    // find accessories by category id
+    Accessories findByCategoryId(Long hairCategoryId);
 }
