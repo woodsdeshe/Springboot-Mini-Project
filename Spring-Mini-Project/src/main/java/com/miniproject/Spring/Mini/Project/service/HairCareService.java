@@ -131,7 +131,7 @@ public class HairCareService {
             Optional<Accessories> accessory = accessoriesRepository.findById(accessoryId);
             if (accessory.isPresent()) {
                 if (accessory.get().getCategory().getId().equals(category.get().getId())) {
-                    accessoriesRepository.delete(accessory.get());
+                     accessoriesRepository.delete(accessory.get());
                 } else {
                     throw new InformationNotFoundException("Accessory with id " + accessoryId + " not found in category " + hairCategoryId);
                 }

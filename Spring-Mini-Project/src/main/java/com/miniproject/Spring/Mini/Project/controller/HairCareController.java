@@ -79,7 +79,8 @@ public class HairCareController {
 
     // http://localhost:9093/api/categories/{categoryId}/accessories/{accessoryId}
     @DeleteMapping(path = "/categories/{hairCategoryId}/accessories/{accessoryId}/")
-    public void deleteAccessory(@PathVariable(value = "hairCategoryId") Long hairCategoryId, @PathVariable(value = "accessoryId") Long accessoryId) {
+    public ResponseEntity<Void> deleteAccessory(@PathVariable(value = "hairCategoryId") Long hairCategoryId, @PathVariable(value = "accessoryId") Long accessoryId) {
         hairCareService.deleteAccessory(hairCategoryId,accessoryId);
+        return ResponseEntity.noContent().build();
     }
 }
