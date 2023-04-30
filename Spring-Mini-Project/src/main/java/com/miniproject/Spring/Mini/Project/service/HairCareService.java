@@ -125,11 +125,12 @@ public class HairCareService {
     }
 
     public void deleteAccessory(Long hairCategoryId, Long accessoryId) {
+        System.out.println("service calling deleteAccessory ==>");
         Accessories accessory = getAccessory(hairCategoryId, accessoryId);
-        if (accessory != null) {
-            accessoriesRepository.delete(accessory);
-        } else {
+        if (accessory == null) {
             throw new InformationNotFoundException("Accessory with id " + accessoryId + " not found in category " + hairCategoryId);
+        } else {
+            accessoriesRepository.delete(accessory);
         }
     }
 }
