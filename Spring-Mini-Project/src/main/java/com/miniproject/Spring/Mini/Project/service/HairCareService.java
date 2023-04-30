@@ -103,7 +103,6 @@ public class HairCareService {
 
     public Accessories getAccessory(Long categoryId, Long accessoryId) {
         System.out.println("service calling getAccessory ==>");
-        Category category = getHairCategory(categoryId);
         Accessories accessory = accessoriesRepository.findAccessoriesById(accessoryId);
 
         if (accessory == null) {
@@ -112,4 +111,6 @@ public class HairCareService {
             return accessory;
         }
     }
+
+    public Accessories updateAccessory()
 }
