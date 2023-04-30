@@ -13,4 +13,6 @@ public interface AccessoriesRepository extends JpaRepository<Accessories, Long> 
 
     // find accessories by category id
     Accessories findByCategoryId(Long hairCategoryId);
+
+
 }

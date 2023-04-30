@@ -34,12 +34,20 @@ public class HairCareService {
         this.hairCareRepository = hairCareRepository;
     }
 
-
+    public static User getCurrentLoggedInUser(){
+        MyUserDetails userDetails=(MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userDetails.getUser();
+    }
 
 
     public List<Category> getHairCategories() {
         System.out.println("service calling getHairCategories");
-        return hairCareRepository.findAll();
+        List<Category> category = hairCareRepository.findByUserId(HairCareService.getCurrentLoggedInUser().getId());
+        if (category.isEmpty()) {
+            throw new InformationNotFoundException("No categories found for user " + HairCareService.getCurrentLoggedInUser().getId());
+        } else {
+            return category;
+        }
     }
 
     public Category createHairCategory(Category hairCareObject) {
