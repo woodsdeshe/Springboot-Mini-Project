@@ -64,17 +64,18 @@ public class Accessories {
     }
 
 
-    public HairCareCategory getHairCareCategory() {
-        return hairCareCategory;
-    }
-
-    public void setHairCareCategory(HairCareCategory hairCareCategory) {
-        this.hairCareCategory = hairCareCategory;
-    }
-
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "hair_care_category_id")
-    private HairCareCategory hairCareCategory;
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     @Override
     public String toString() {

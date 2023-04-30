@@ -2,7 +2,6 @@ package com.miniproject.Spring.Mini.Project.model;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "categories")
-public class HairCareCategory {
+public class Category {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,18 +45,19 @@ public class HairCareCategory {
         this.description = description;
     }
 
-    public HairCareCategory() {
+    public Category() {
     }
 
-    public HairCareCategory(Long id, String name, String description) {
+    public Category(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
 
 
-    @OneToMany(mappedBy = "hairCareCategory", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Accessories> accessoriesList = new ArrayList<>();
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Accessories> accessoriesList;
 
     public List<Accessories> getAccessoriesList() {
         return accessoriesList;

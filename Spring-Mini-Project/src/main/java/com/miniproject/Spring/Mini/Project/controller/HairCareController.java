@@ -1,7 +1,7 @@
 package com.miniproject.Spring.Mini.Project.controller;
 
 import com.miniproject.Spring.Mini.Project.model.Accessories;
-import com.miniproject.Spring.Mini.Project.model.HairCareCategory;
+import com.miniproject.Spring.Mini.Project.model.Category;
 import com.miniproject.Spring.Mini.Project.service.HairCareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,25 +23,25 @@ public class HairCareController {
 
     // http://localhost:9093/api/categories/
     @GetMapping(path = "/categories/")
-    public List<HairCareCategory> getCategories() {
+    public List<Category> getCategories() {
         return hairCareService.getHairCategories();
     }
 
     // http://localhost:9093/api/categories/
     @PostMapping(path = "/categories/")
-    public HairCareCategory createHairCategory(@RequestBody HairCareCategory hairCareObject) {
+    public Category createHairCategory(@RequestBody Category hairCareObject) {
         return hairCareService.createHairCategory(hairCareObject);
     }
 
     // http://localhost:9093/api/categories/{categoryId}/
     @GetMapping(path = "/categories/{hairCategoryId}")
-    public HairCareCategory getHairCategory(@PathVariable  Long hairCategoryId) {
+    public Category getHairCategory(@PathVariable  Long hairCategoryId) {
         return hairCareService.getHairCategory(hairCategoryId);
     }
 
     // http://localhost:9093/api/categories/{categoryId}/
     @PutMapping(path = "/categories/{hairCategoryId}")
-    public HairCareCategory updateHairCategory(@PathVariable Long hairCategoryId, @RequestBody HairCareCategory hairCareObject) {
+    public Category updateHairCategory(@PathVariable Long hairCategoryId, @RequestBody Category hairCareObject) {
         return hairCareService.updateHairCategory(hairCategoryId, hairCareObject);
     }
 
