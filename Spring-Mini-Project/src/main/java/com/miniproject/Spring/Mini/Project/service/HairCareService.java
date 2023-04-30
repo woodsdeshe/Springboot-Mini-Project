@@ -99,4 +99,10 @@ public class HairCareService {
             throw new InformationNotFoundException("category with id " + categoryId + " not found");
         }
     }
+
+    public Accessories getAccessory(Long categoryId, Long accessoryId) {
+        Category category = getHairCategory(categoryId);
+        Accessories accessory = accessoriesRepository.findAccessoriesById(accessoryId);
+        return category
+    }
 }
