@@ -58,6 +58,8 @@ public class HairCareController {
         return hairCareService.getAccessories(hairCategoryId);
     }
 
+
+
     @PostMapping(path = "/categories/{hairCategoryId}/accessories/")
     public Accessories createAccessories(@PathVariable(value = "hairCategoryId") Long hairCategoryId, @RequestBody Accessories accessoryObject) {
         return hairCareService.createAccessories(hairCategoryId, accessoryObject);

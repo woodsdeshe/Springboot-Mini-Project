@@ -91,6 +91,7 @@ public class HairCareService {
     }
 
     public Accessories createAccessories(Long categoryId, Accessories accessoryObject) {
+        System.out.println("service calling createAccessories ==>");
         try {
             Optional<Category> category = hairCareRepository.findById(categoryId);
             accessoryObject.setCategory(category.get());
@@ -101,8 +102,14 @@ public class HairCareService {
     }
 
     public Accessories getAccessory(Long categoryId, Long accessoryId) {
+        System.out.println("service calling getAccessory ==>");
         Category category = getHairCategory(categoryId);
         Accessories accessory = accessoriesRepository.findAccessoriesById(accessoryId);
-        return category
+
+        if (accessory == null) {
+            throw new InformationNotFoundException("Accessory not found for category " + categoryId + " and accessoryId " + accessoryId);
+        } else {
+            return accessory;
+        }
     }
 }
