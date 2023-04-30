@@ -59,6 +59,8 @@ public class Category {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Accessories> accessoriesList;
 
+    @ManyToOne()
+
     public List<Accessories> getAccessoriesList() {
         return accessoriesList;
     }
