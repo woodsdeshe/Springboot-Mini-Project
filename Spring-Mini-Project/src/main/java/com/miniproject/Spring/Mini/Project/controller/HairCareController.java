@@ -4,9 +4,11 @@ import com.miniproject.Spring.Mini.Project.model.Accessories;
 import com.miniproject.Spring.Mini.Project.model.HairCareCategory;
 import com.miniproject.Spring.Mini.Project.service.HairCareService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Access;
 import java.util.List;
 
 
@@ -59,9 +61,8 @@ public class HairCareController {
     }
 
     @PostMapping(path = "/categories/{hairCategoryId}/accessories/")
-    public Accessories createAccessories(@PathVariable(value = "hairCategoryId") Long hairCategoryId, @RequestBody Accessories acessoryObject) {
-        return hairCareService.createAccessories(hairCategoryId, acessoryObject);
+    public ResponseEntity<Accessories> createAccessories(@PathVariable(value = "hairCategoryId") Long hairCategoryId, @RequestBody Accessories accessoryObject) {
+        Accessories createdAccessory = hairCareService.createAccessories(hairCategoryId, accessoryObject);
+        return new ResponseEntity<>(createdAccessory, HttpStatus.CREATED);
     }
-
-
 }
