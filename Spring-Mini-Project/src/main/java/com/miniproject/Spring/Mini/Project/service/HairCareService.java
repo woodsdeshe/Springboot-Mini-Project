@@ -126,11 +126,20 @@ public class HairCareService {
 
     public void deleteAccessory(Long hairCategoryId, Long accessoryId) {
         System.out.println("service calling deleteAccessory ==>");
-        Accessories accessory = getAccessory(hairCategoryId, accessoryId);
-        if (accessory == null) {
-            throw new InformationNotFoundException("Accessory with id " + accessoryId + " not found in category " + hairCategoryId);
+        Optional<Category> category = hairCareRepository.findById(hairCategoryId);
+        if (category.isPresent()) {
+            Optional<Accessories> accessory = accessoriesRepository.findById(accessoryId);
+            if (accessory.isPresent()) {
+                if (accessory.get().getCategory().getId().equals(category.get().getId())) {
+                    accessoriesRepository.delete(accessory.get());
+                } else {
+                    throw new InformationNotFoundException("Accessory with id " + accessoryId + " not found in category " + hairCategoryId);
+                }
+            } else {
+                throw new InformationNotFoundException("Accessory with id " + accessoryId + " not found");
+            }
         } else {
-            accessoriesRepository.delete(accessory);
+            throw new InformationNotFoundException("Category with id " + hairCategoryId + " not found ");
         }
     }
 }
