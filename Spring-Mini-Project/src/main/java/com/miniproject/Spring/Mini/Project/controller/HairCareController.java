@@ -54,8 +54,13 @@ public class HairCareController {
 
     // http://localhost:9093/api/categories/{categoryId}/accessories/
     @GetMapping(path = "/categories/{hairCategoryId}/accessories/")
-    public List<Accessories> getHairAccessories(Long hairCategoryId) {
+    public List<Accessories> getHairAccessories(@PathVariable(value = "hairCategoryId") Long hairCategoryId) {
         return hairCareService.getAccessories(hairCategoryId);
+    }
+
+    @PostMapping(path = "/categories/{hairCategoryId}/accessories/")
+    public Accessories createAccessories(@PathVariable(value = "hairCategoryId") Long hairCategoryId, @RequestBody Accessories acessoryObject) {
+        return hairCareService.createAccessories(hairCategoryId, acessoryObject);
     }
 
 

@@ -98,6 +98,7 @@ public class HairCareService {
         if (accessory != null) {
             throw new InformationExistException("Accessory with name " + accessory.getName() + " already exists");
         } else {
+            accessoryObject.setHairCareCategory(category);
             category.getAccessoriesList().add(accessoryObject);
             return accessoriesRepository.save(accessoryObject);
         }
