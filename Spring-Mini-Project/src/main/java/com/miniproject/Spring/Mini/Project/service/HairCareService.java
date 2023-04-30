@@ -71,13 +71,13 @@ public class HairCareService {
     }
 
 
-    public void deleteHairCategory(Long categoryId) {
+    public void deleteHairCategory(Long hairCategoryId) {
         System.out.println("service calling deleteHairCategory ==>");
-        Optional<Category> category = hairCareRepository.findById(categoryId);
+        Optional<Category> category = hairCareRepository.findById(hairCategoryId);
         if (category.isPresent()) {
             hairCareRepository.delete(category.get());
         } else {
-            throw new InformationNotFoundException("Category with id " + categoryId + " not found ");
+            throw new InformationNotFoundException("Category with id " + hairCategoryId + " not found ");
         }
     }
 
@@ -90,27 +90,29 @@ public class HairCareService {
         return category.getAccessoriesList();
     }
 
-    public Accessories createAccessories(Long categoryId, Accessories accessoryObject) {
+    public Accessories createAccessories(Long hairCategoryId, Accessories accessoryObject) {
         System.out.println("service calling createAccessories ==>");
         try {
-            Optional<Category> category = hairCareRepository.findById(categoryId);
+            Optional<Category> category = hairCareRepository.findById(hairCategoryId);
             accessoryObject.setCategory(category.get());
             return accessoriesRepository.save(accessoryObject);
         } catch (NoSuchElementException e) {
-            throw new InformationNotFoundException("category with id " + categoryId + " not found");
+            throw new InformationNotFoundException("category with id " + hairCategoryId + " not found");
         }
     }
 
-    public Accessories getAccessory(Long categoryId, Long accessoryId) {
+    public Accessories getAccessory(Long hairCategoryId, Long accessoryId) {
         System.out.println("service calling getAccessory ==>");
         Accessories accessory = accessoriesRepository.findAccessoriesById(accessoryId);
 
         if (accessory == null) {
-            throw new InformationNotFoundException("Accessory not found for category " + categoryId + " and accessoryId " + accessoryId);
+            throw new InformationNotFoundException("Accessory not found for category " + hairCategoryId + " and accessoryId " + accessoryId);
         } else {
             return accessory;
         }
     }
 
-    public Accessories updateAccessory()
+    public Accessories updateAccessory(Long hairCategoryId, Long accessoryId, Accessories accessoryObject) {
+        sou
+    }
 }
