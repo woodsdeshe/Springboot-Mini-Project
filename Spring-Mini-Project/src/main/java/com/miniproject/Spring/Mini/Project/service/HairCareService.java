@@ -4,8 +4,11 @@ import com.miniproject.Spring.Mini.Project.exception.InformationExistException;
 import com.miniproject.Spring.Mini.Project.exception.InformationNotFoundException;
 import com.miniproject.Spring.Mini.Project.model.Accessories;
 import com.miniproject.Spring.Mini.Project.model.Category;
+import com.miniproject.Spring.Mini.Project.model.User;
+import com.miniproject.Spring.Mini.Project.security.MyUserDetails;
 import com.miniproject.Spring.Mini.Project.repository.AccessoriesRepository;
 import com.miniproject.Spring.Mini.Project.repository.HairCareRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,12 @@ public class HairCareService {
     public void setHairCareRepository(HairCareRepository hairCareRepository) {
         this.hairCareRepository = hairCareRepository;
     }
+
+    public static User getCurrentLoggedInUser(){
+        MyUserDetails userDetails=(MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userDetails.getUser();
+    }
+
 
     public List<Category> getHairCategories() {
         System.out.println("service calling getHairCategories");
