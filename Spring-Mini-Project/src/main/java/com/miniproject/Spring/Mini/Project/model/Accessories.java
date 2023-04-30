@@ -69,6 +69,19 @@ public class Accessories {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Category getCategory() {
         return category;
     }
