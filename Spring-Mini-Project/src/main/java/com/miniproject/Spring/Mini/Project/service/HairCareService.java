@@ -34,10 +34,7 @@ public class HairCareService {
         this.hairCareRepository = hairCareRepository;
     }
 
-    public static User getCurrentLoggedInUser(){
-        MyUserDetails userDetails=(MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return userDetails.getUser();
-    }
+
 
 
     public List<Category> getHairCategories() {

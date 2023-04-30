@@ -1,5 +1,6 @@
 package com.miniproject.Spring.Mini.Project.security;
 
+import com.miniproject.Spring.Mini.Project.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -72,6 +73,11 @@ public class SecurityConfiguration {
     public MyUserDetails myUserDetails() {
         return (MyUserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
+    }
+
+    public static User getCurrentLoggedInUser(){
+        MyUserDetails userDetails=(MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userDetails.getUser();
     }
 
 }
