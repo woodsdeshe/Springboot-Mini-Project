@@ -1,5 +1,6 @@
 package com.miniproject.Spring.Mini.Project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -59,7 +60,18 @@ public class Category {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Accessories> accessoriesList;
 
-    @ManyToOne()
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public List<Accessories> getAccessoriesList() {
         return accessoriesList;
