@@ -20,18 +20,13 @@ import java.util.Optional;
 @Service
 public class HairCareService {
 
-    private AccessoriesRepository accessoriesRepository;
+    private final AccessoriesRepository accessoriesRepository;
+    private final HairCareRepository hairCareRepository;
 
-    @Autowired
-    public void setAccessoriesRepository(AccessoriesRepository accessoriesRepository) {
-        this.accessoriesRepository = accessoriesRepository;
-    }
 
-    private HairCareRepository hairCareRepository;
-
-    @Autowired
-    public void setHairCareRepository(HairCareRepository hairCareRepository) {
+    public HairCareService(HairCareRepository hairCareRepository, AccessoriesRepository accessoriesRepository) {
         this.hairCareRepository = hairCareRepository;
+        this.accessoriesRepository = accessoriesRepository;
     }
 
     public static User getCurrentLoggedInUser(){
@@ -53,10 +48,11 @@ public class HairCareService {
     public Category createHairCategory(Category hairCareObject) {
         System.out.println("service calling createCategory ==>");
 
-        Category category = hairCareRepository.findByName(hairCareObject.getName());
+        Category category = hairCareRepository.findByUserIdAndName(HairCareService.getCurrentLoggedInUser().getId(), hairCareObject.getName());
         if (category != null) {
             throw new InformationExistException("category with name " + category.getName() + " already exists");
         } else {
+            hairCareObject.setUser(getCurrentLoggedInUser());
             return hairCareRepository.save(hairCareObject);
         }
     }

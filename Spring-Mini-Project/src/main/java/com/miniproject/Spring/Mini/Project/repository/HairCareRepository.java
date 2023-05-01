@@ -14,6 +14,6 @@ public interface HairCareRepository extends JpaRepository<Category, Long> {
 
     List<Category> findByUserId(Long userId);
 
-    Category findByUserIdAndAndName(Long userId, String categoryName);
+    Category findByUserIdAndName(Long userId, String categoryName);
 }
 
