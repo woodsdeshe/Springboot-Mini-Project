@@ -40,16 +40,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         try {
             String jwt = parseJwt(request);
-            // check if the jwt key is valid and not null
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
-                // if valid get user email from the key
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
-                // load user details from the key
                 UserDetails userDetails = this.myUserDetailsService.loadUserByUsername(username);
-                // set username and password authentication token from user user details
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
-                // build request and get security content
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

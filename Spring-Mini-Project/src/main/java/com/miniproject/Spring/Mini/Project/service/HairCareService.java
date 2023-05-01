@@ -8,6 +8,8 @@ import com.miniproject.Spring.Mini.Project.model.User;
 import com.miniproject.Spring.Mini.Project.security.MyUserDetails;
 import com.miniproject.Spring.Mini.Project.repository.AccessoriesRepository;
 import com.miniproject.Spring.Mini.Project.repository.HairCareRepository;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -20,17 +22,22 @@ import java.util.Optional;
 @Service
 public class HairCareService {
 
-    private final AccessoriesRepository accessoriesRepository;
-    private final HairCareRepository hairCareRepository;
+    private AccessoriesRepository accessoriesRepository;
+    private HairCareRepository hairCareRepository;
 
 
-    public HairCareService(HairCareRepository hairCareRepository, AccessoriesRepository accessoriesRepository) {
-        this.hairCareRepository = hairCareRepository;
+    @Autowired
+    public void setAccessoriesRepository(AccessoriesRepository accessoriesRepository) {
         this.accessoriesRepository = accessoriesRepository;
     }
 
-    public static User getCurrentLoggedInUser(){
-        MyUserDetails userDetails=(MyUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    @Autowired
+    public void setHairCareRepository(HairCareRepository hairCareRepository) {
+        this.hairCareRepository = hairCareRepository;
+    }
+
+    public static User getCurrentLoggedInUser() {
+        MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userDetails.getUser();
     }
 
@@ -59,7 +66,7 @@ public class HairCareService {
 
     public Category getHairCategory(Long hairCategoryId) {
         System.out.println("service calling getHairCategory");
-        Category category = hairCareRepository.findHairCareCategoryById(hairCategoryId);
+        Category category = hairCareRepository.findByIdAndUserId(HairCareService.getCurrentLoggedInUser().getId(), hairCategoryId);
 
         if (category == null) {
             throw new InformationNotFoundException("category not found for " + hairCategoryId);
@@ -70,13 +77,14 @@ public class HairCareService {
 
     public Category updateHairCategory(Long hairCategoryId, Category hairCareObject) {
         System.out.println("service calling updateHairCategory");
-        Category category = getHairCategory(hairCategoryId);
+        Category category = hairCareRepository.findByIdAndUserId(hairCategoryId, HairCareService.getCurrentLoggedInUser().getId());
             if (hairCareObject.equals(hairCareRepository.findByName(hairCareObject.getName()))){
                 throw new InformationExistException("Category " + category.getName() + " already exists");
             } else {
                 Category updateHairCategory = hairCareRepository.findHairCareCategoryById(hairCategoryId);
                 updateHairCategory.setName(hairCareObject.getName());
                 updateHairCategory.setDescription(hairCareObject.getDescription());
+                updateHairCategory.setUser(HairCareService.getCurrentLoggedInUser());
                 return hairCareRepository.save(updateHairCategory);
         }
     }
