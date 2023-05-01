@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.miniproject.Spring.Mini.Project.request.LoginRequest;
 
 @RestController
-@RequestMapping(path = "/api")
+@RequestMapping(path = "/auth/users/")
 public class UserController {
 
     private UserService userService;
@@ -22,7 +22,7 @@ public class UserController {
     }
 
     // http://localhost:9093/auth/users/register/
-    @PostMapping("/register")
+    @PostMapping("/register/")
     public User createUser(@RequestBody User userObject) {
         System.out.println("service calling createUser ==>");
         return userService.createUser(userObject);
